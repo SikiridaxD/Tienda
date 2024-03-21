@@ -1,0 +1,63 @@
+<form [formGroup]="productForm">
+  <div class="formgrid grid mt-5">
+    <div class="col-4">
+        <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [containerStyle]="{ 'max-width': '640px' }">
+          <ng-template pTemplate="item" let-item>
+              <img [src]="item" style="width: 100%; display: block;" />
+          </ng-template>
+      </p-galleria>
+  
+        <button>Add</button>
+      </div>
+    <div class="col-8 formgrid grid">
+      <div class="field col-12 md:col-12">
+        <label for="productName">Product Name</label>
+        <input
+          id="productName"
+          type="text"
+          formControlName="title"
+          class="text-base text-color surface-overlay p-2 border-round appearance-none outline-none focus:border-primary w-full"
+        />
+      </div>
+      <div class="field col-4">
+        <label for="category">Category</label>
+        <select
+          id="category"
+          formControlName="category"
+          class="w-full text-base text-color surface-overlay p-2 border-solid border-round outline-none focus:border-primary"
+          style="appearance: auto"
+        >
+          <option *ngFor="let category of categories" [value]="category" >{{ category }}</option>
+        </select>
+      </div>
+      <div class="field col-4">
+        <label for="brand">Brand</label>
+        <input
+          id="brand"
+          type="text"
+          formControlName="brand"
+          class="text-base text-color surface-overlay p-2 border-round appearance-none outline-none focus:border-primary w-full"
+        />
+      </div>
+      <div class="field col-4">
+        <label for="price">Price</label>
+        <input
+          id="price"
+          type="text"
+          formControlName="price"
+          class="text-base text-color surface-overlay p-2 border-round appearance-none outline-none focus:border-primary w-full"
+        />
+      </div>
+      <div class="field col-12">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          type="text"
+          rows="4"
+          formControlName="description"
+          class="text-base text-color surface-overlay p-2 border-round appearance-none outline-none focus:border-primary w-full"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</form>

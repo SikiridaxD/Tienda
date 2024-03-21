@@ -1,0 +1,28 @@
+<h1>Products</h1>
+
+<p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td><img [src]="product.thumbnail" class="thumbnail"></td>
+            <td>{{ product.title }}</td>
+            <td>{{ product.brand }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.price | currency }}</td>
+            <td><p-button 
+                icon="pi pi-pencil" 
+                styleClass="p-button-sm"
+                [routerLink]="['/admin/products/', product.id]"
+                > </p-button></td>
+        </tr>
+    </ng-template>
+</p-table>
