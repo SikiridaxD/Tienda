@@ -24,6 +24,13 @@ export class ProductService {
     return this.http.get<Product>(url);
   }
 
+  updateProduct(product: Product) {
+    const url = `${this.api}/products/${product.id} `;
+    return this.http.put<Product>(url,{
+      product
+    });
+  }
+
   getCategories() {
     const url = ` ${this.api}/products/categories `;
     return this.http.get<string[]>(url);
