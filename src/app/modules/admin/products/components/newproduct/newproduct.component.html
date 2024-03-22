@@ -1,33 +1,19 @@
-<p-button icon="pi pi-arrow-left" styleClass="mt-2" [routerLink]="['/admin/products']"></p-button>
-<p-card header="Product detail" styleClass="mt-2">
-  <form [formGroup]="productForm" 
-  (submit)="saveProduct()">
+<p-button
+  icon="pi pi-arrow-left"
+  styleClass="mt-2"
+  [routerLink]="['/admin/products']"
+></p-button>
+<p-card header="Product detail" styleClass="mt-6">
+  <form [formGroup]="productForm" (submit)="saveProduct()">
     <div class="formgrid grid mt-5">
       <div class="col-4">
-        <p-galleria
-          [value]="images"
-          [showIndicators]="true"
-          [showThumbnails]="false"
-          [containerStyle]="{ 'max-width': '640px', }"
-        >
-          <ng-template pTemplate="item" let-item>
-            <img
-              [src]="item"
-              style="width: 100%; display: block; height: 300px"
-            />
-          </ng-template>
-        </p-galleria>
+        <img
+          src="https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg"
+          alt=""
+        />
       </div>
       <div class="col-8 formgrid grid">
         <div class="field col-12 md:col-12 mb-5">
-          <!-- <label for="productName">Product Name</label>
-       <input
-          id="productName"
-          type="text"
-          formControlName="title"
-          class="text-base text-color surface-overlay p-2 border-round appearance-none outline-none focus:border-primary w-full"
-        /> -->
-
           <span class="p-float-label">
             <input
               type="text"
@@ -37,6 +23,18 @@
             />
             <label htmlFor="username">Title</label>
           </span>
+          <div
+            *ngIf="productForm.get('title')?.touched && productForm.get('title')?.errors?.['required']"
+            class="text-red-500"
+          >
+            This field is requiered
+          </div>
+          <div
+            *ngIf="productForm.get('title')?.touched && productForm.get('title')?.errors?.['minLength']"
+            class="text-red-500"
+          >
+            Title must be at least 4 characters
+          </div>
         </div>
         <div class="field col-4 mb-5">
           <span class="p-float-label">
@@ -58,6 +56,12 @@
             />
             <label htmlFor="brand">Brand</label>
           </span>
+          <div
+            *ngIf="productForm.get('brand')?.touched && productForm.get('brand')?.errors?.['required']"
+            class="text-red-500"
+          >
+            This field is requiered
+          </div>
         </div>
         <div class="field col-4 mb-5">
           <div class="p-inputgroup">
@@ -94,5 +98,4 @@
     </div>
   </form>
 </p-card>
-
 <p-toast></p-toast>

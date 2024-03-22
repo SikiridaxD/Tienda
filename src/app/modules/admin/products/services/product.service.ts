@@ -11,7 +11,6 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   /**
-   *
    * Esta funcion devuelve toda la lista de productos
    */
   getProducts(): Observable<Product[]> {
@@ -24,6 +23,13 @@ export class ProductService {
     return this.http.get<Product>(url);
   }
 
+  newProduct(product: Product){
+    const url = ` ${this.api}/products/add `;
+    return this.http.post<Product>(url, {
+      product
+    } )
+  }
+  
   updateProduct(product: Product) {
     const url = `${this.api}/products/${product.id} `;
     return this.http.put<Product>(url,{
@@ -34,5 +40,10 @@ export class ProductService {
   getCategories() {
     const url = ` ${this.api}/products/categories `;
     return this.http.get<string[]>(url);
+  }
+
+  searchProducts(search: string) { 
+    const url = ` ${this.api}	/products/search?q=${search} `;
+    return this.http.get<Product[]>(url).pipe(map((m: any) => m.products))
   }
 }

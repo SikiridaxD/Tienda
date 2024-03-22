@@ -10,11 +10,25 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CardModule } from 'primeng/card';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ToastModule } from 'primeng/toast';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SearchBoxComponent,
+    
+  ],
   imports: [
     CommonModule,
+    ToastModule,
+    TableModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    GalleriaModule,
+    InputTextModule,
+    DropdownModule,
+    InputTextareaModule,
+    CardModule,
+    InputNumberModule,
   ],
   exports: [
     ToastModule,
@@ -26,7 +40,8 @@ import { ToastModule } from 'primeng/toast';
     DropdownModule,
     InputTextareaModule,
     CardModule,
-    InputNumberModule
+    InputNumberModule,
+    SearchBoxComponent,
   ]
 })
 export class SharedModule { }

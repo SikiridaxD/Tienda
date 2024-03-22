@@ -1,5 +1,14 @@
 <h1>Products</h1>
 
+<app-search-box
+(onDebounce)="searchProduct($event)"
+></app-search-box>
+
+<div class="flex justify-content-end">
+    <p-button icon="pi pi-plus" [routerLink]="['/admin/new-product']">
+    </p-button>
+</div>
+
 <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
         <tr>
