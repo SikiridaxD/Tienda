@@ -1,0 +1,35 @@
+<div class="card flex justify-content-center">
+  <p-card
+    class="pt-0"
+    header="{{ this.title }}"
+    subheader="{{ this.category }}"
+    [style]="{ width: '320px' }"
+  >
+    <ng-template pTemplate="header" class="hidden">
+      <img class="border-top-rounded" alt="Card" src="{{ this.imageSrc }}" />
+    </ng-template>
+
+    <div class="card flex justify-content-between">
+      <p-rating [readonly]="true" [cancel]="false"></p-rating>
+      <div class="">
+        {{ this.price | currency }}
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Add"
+        icon="pi pi-cart-plus"
+        styleClass="p-button-outlined"
+        (onClick)="addToCart(this.product.id?.toString())"
+      ></p-button>
+      <p-button
+        label="View"
+        icon="pi pi-tag"
+        styleClass="p-button-outlined"
+        [style]="{ 'margin-left': '.5em' }"
+        [routerLink]="['/store/product/', product.id]"
+      ></p-button>
+    </ng-template>
+  </p-card>
+</div>

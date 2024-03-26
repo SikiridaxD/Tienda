@@ -1,0 +1,18 @@
+<div class=" p-5 grid">
+    <div class="col-6">
+        <div *ngIf="this.cart.length === 0">Add something to your cart!</div>
+        <div *ngFor="let product of cart">
+        <app-minicard
+        [cart]="product" ></app-minicard>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card flex justify-content-center">
+            <p-card header="Pucharse sumary">
+                <p class="m-0">
+                    Total : {{ this.total | currency }}
+                </p>
+            </p-card>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProductComponent } from './components/product/product.component';
 import { MessageService } from 'primeng/api';
 import { NewProductComponent } from './components/newproduct/newproduct.component';
+import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 
 
 
@@ -13,7 +14,8 @@ import { NewProductComponent } from './components/newproduct/newproduct.componen
   declarations: [
     ProductListComponent,
     ProductComponent,
-    NewProductComponent
+    NewProductComponent,
+    LayoutPageComponent
   ],
   imports: [
     CommonModule,

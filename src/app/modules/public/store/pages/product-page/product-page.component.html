@@ -1,0 +1,51 @@
+<div class="grid p-5">
+  <div class="col-1"></div>
+  <div class="col-5">
+    <div class="card">
+        <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item" style="width: 100%; display: block;" />
+            </ng-template>
+        </p-galleria>
+    </div>
+</div>
+  <div class="col-5 border">
+    <div>
+    <h2>{{ this.product.title  }}</h2>    
+    </div>
+        <div class="card flex justify-content-start">
+            <p-rating value="4" [readonly]="true" [cancel]="false"></p-rating>
+        </div>
+    <div class="mt-4 mb-4">
+        <strong>
+            {{ this.product.price | currency }}
+        </strong>
+    </div>
+    <div class="mb-2">{{ this.product.brand }}</div>
+    <div class="mb-2">{{ this.product.category }}</div>
+    <p-divider></p-divider>
+    <div>{{ this.product.description }}</div>
+    <p-divider></p-divider>
+    <div>
+        Stock: {{ this.product.stock }}
+        <div class="card flex justify-content-center">
+            <p-inputNumber 
+            value="1"
+            suffix=" units"
+            [showButtons]="true" 
+            buttonLayout="horizontal" 
+            spinnerMode="horizontal" 
+            inputId="vertical" 
+            decrementButtonClass="p-button-secondary"
+            incrementButtonClass="p-button-secondary" 
+            incrementButtonIcon="pi pi-plus" 
+            decrementButtonIcon="pi pi-minus"></p-inputNumber>
+        </div>
+    </div>
+    <div>
+        
+
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>

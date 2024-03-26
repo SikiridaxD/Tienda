@@ -1,0 +1,24 @@
+<div class="card flex justify-content-center">
+  <p-card [style]="{ width: '600px' }" header="{{ this.title }}">
+    <ng-template pTemplate="content">
+      <div class="grid">
+        <div class="col-3">
+          <img style="width: 100px" src="{{ this.imageSrc }}" alt="" />
+        </div>
+        <div class="col-9">
+          <p class="m-0">
+            <strong>
+              {{ this.price | currency }}
+            </strong>
+          </p>
+          quantity: {{ this.cart.quantity }}
+          <a href="">Eliminar</a>
+
+        </div>
+      </div>
+      <p-divider></p-divider>
+    </ng-template>
+  </p-card>
+</div>
+
+

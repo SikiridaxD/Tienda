@@ -1,0 +1,11 @@
+<div class="formgroup-inline">
+  <div class="field">
+    <label class="" htmlFor="username">Username</label>
+    <input pInputText id="username" aria-describedby="username-help" />
+  </div>
+  <div class="field">
+    <label class="" htmlFor="password">Password</label>
+    <p-password [feedback]="false"></p-password>
+  </div>
+  <p-button label="Login" (onClick)="login()"></p-button>
+</div>

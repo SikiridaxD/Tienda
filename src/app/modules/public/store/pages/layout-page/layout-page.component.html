@@ -1,0 +1,47 @@
+<div
+  class="surface-section px-6 flex justify-content-between align-items-center relative lg:static"
+  style="min-height: 70px"
+>
+  <div
+    class="flex-grow-1 justify-content-start hidden lg:flex absolute lg:static w-full left-0 top-100 z-1 shadow-2 lg:shadow-none surface-overlay"
+  >
+    <a
+      [routerLink]="['/store/home']"
+      class="p-element flex align-items-center cursor-pointer surface-0 text-900 no-underline"
+      ><i class="pi pi-shopping-bag mr-2"></i>
+    </a>
+    <p-button
+      (click)="toggleSidebar()"
+      styleClass=" p-button-outlined flex align-items-center justify-content-center font-medium cursor-pointer surface-0 text-900"
+      ><i class="pi pi-bars mr-2"></i
+    ></p-button>
+  </div>
+  <div
+    class="flex-grow-1 justify-content-center hidden lg:flex absolute lg:static w-full left-0 top-100 z-1 shadow-2 lg:shadow-none surface-overlay"
+  >
+  <app-search-box></app-search-box>
+
+</div>
+  <div
+    class="p-element flex-grow-1 justify-content-end hidden lg:flex absolute lg:static w-full left-0 top-100 z-1 shadow-2 lg:shadow-none surface-overlay"
+  >
+    <a
+      [routerLink]="['/store/cart']"
+      class="flex align-items-center cursor-pointer surface-0 text-900 no-underline"
+      ><i class="pi pi-shopping-cart m-2"></i>
+    </a>
+  </div>
+</div>
+
+<div class="card">
+  <p-sidebar [(visible)]="sidebarVisible">
+    <ng-template pTemplate="header"><strong>Shopping</strong></ng-template>
+    <div class="card flex justify-content-center">
+      <p-panelMenu [model]="items" [style]="{ width: '300px' }"></p-panelMenu>
+    </div>
+  </p-sidebar>
+</div>
+
+<div>
+    <router-outlet></router-outlet>
+</div>
