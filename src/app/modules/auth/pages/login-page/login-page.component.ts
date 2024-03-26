@@ -14,7 +14,6 @@ export class LoginPageComponent implements OnInit{
     private authService: AuthService){}
 
   ngOnInit(): void {
-    console.log(this.authService.isAuthenticated())
   }
 
   login(){
