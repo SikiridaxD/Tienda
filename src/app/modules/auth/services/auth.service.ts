@@ -21,7 +21,6 @@ export class AuthService {
 
     if (!!localStorage.getItem('token')) return of(true);
     return of(false)
-    // return of(true)
   }
 
 }

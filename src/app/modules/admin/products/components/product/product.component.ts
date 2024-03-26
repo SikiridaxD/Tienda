@@ -18,14 +18,11 @@ export class ProductComponent implements OnInit {
 
   productForm = this.formBuilder.group({
     id: [0],
-    title: [
-      '',
-      [Validators.required, this.vs.noWhitespace, Validators.minLength(4)],
-    ],
+    title: ['',  [Validators.required, this.vs.noWhitespace, Validators.minLength(4)]],
     category: ['', Validators.required],
-    brand: ['', Validators.required],
-    price: [0, Validators.required],
-    description: ['', Validators.required],
+    brand: ['',[Validators.required, Validators.minLength(2), this.vs.noWhitespace]],
+    price: [0, [Validators.required, Validators.min(1)]],
+    description: [''],
   });
 
   constructor(

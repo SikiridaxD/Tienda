@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Product } from 'src/app/core/models/product.model';
-import { ProductService } from 'src/app/modules/admin/products/services/product.service';
 import { CartService } from 'src/app/modules/public/store/services/cart.service';
 
 @Component({
@@ -24,7 +23,6 @@ export class CardComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private messageService: MessageService,
-    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -51,16 +49,5 @@ export class CardComponent implements OnInit {
     this.description = this.product.description;
     this.imageSrc = this.product.images[0];
     this.price = this.product.price;
-  }
-
-  getProduct() {
-    return this.productService.getProductById('5').subscribe((data) => {
-      this.product = data;
-      this.title = this.product.title;
-      this.category = this.product.category;
-      this.description = this.product.description;
-      this.imageSrc = this.product.images[0];
-      this.price = this.product.price;
-    });
   }
 }

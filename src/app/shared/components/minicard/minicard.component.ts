@@ -35,7 +35,6 @@ export class MinicardComponent {
   constructor(private productService: ProductService){}
   
   ngOnInit(): void {
-    // this.getProduct(this.cart.id.toString())
     this.updateProduct()
   }
 
@@ -47,16 +46,4 @@ export class MinicardComponent {
     this.imageSrc = this.cart.product.images[0]
     this.price = this.cart.product.price
   }
-
-  getProduct(id: string){
-   return this.productService.getProductById(id).subscribe( data => {
-      this.product = data;
-      this.title = this.product.title
-      this.category = this.product.category
-      this.description = this.product.description
-      this.imageSrc = this.product.images[0]
-      this.price = this.product.price
-    })
-  }
-
 }
