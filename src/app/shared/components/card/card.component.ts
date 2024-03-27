@@ -9,7 +9,7 @@ import { CartService } from 'src/app/modules/public/store/services/cart.service'
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  value: number = 4;
+  value: number = 0;
 
   @Input()
   product!: Product;
@@ -49,5 +49,6 @@ export class CardComponent implements OnInit {
     this.description = this.product.description;
     this.imageSrc = this.product.images[0];
     this.price = this.product.price;
+    this.value = this.product.rating/2;
   }
 }

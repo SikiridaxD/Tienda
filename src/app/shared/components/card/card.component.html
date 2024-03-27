@@ -10,7 +10,7 @@
     </ng-template>
 
     <div class="card flex justify-content-between">
-      <p-rating [readonly]="true" [cancel]="false"></p-rating>
+      <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
       <div class="">
         {{ this.price | currency }}
       </div>

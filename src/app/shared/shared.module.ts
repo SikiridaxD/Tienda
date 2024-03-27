@@ -13,7 +13,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { PasswordModule } from 'primeng/password';
 import { RatingModule } from 'primeng/rating';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from 'primeng/sidebar';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -45,6 +45,7 @@ import { MinicardComponent } from './components/minicard/minicard.component';
     PanelMenuModule,
     RatingModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
     ButtonModule,
@@ -67,6 +68,7 @@ import { MinicardComponent } from './components/minicard/minicard.component';
     SidebarModule,
     TableModule,
     ToastModule,
+    FormsModule,
   ]
 })
 export class SharedModule { }

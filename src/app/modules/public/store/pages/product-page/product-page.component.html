@@ -14,7 +14,7 @@
     <h2>{{ this.product.title  }}</h2>    
     </div>
         <div class="card flex justify-content-start">
-            <p-rating value="4" [readonly]="true" [cancel]="false"></p-rating>
+            <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
         </div>
     <div class="mt-4 mb-4">
         <strong>

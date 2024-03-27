@@ -23,7 +23,7 @@ export class ProductPageComponent implements OnInit{
     images: []
   };
   images: any[] = [];
-  value: number = 4;
+  value: number = 0;
   responsiveOptions: any[] = [];
   quantity: number = 1
 
@@ -58,6 +58,7 @@ export class ProductPageComponent implements OnInit{
   getProduct(id: string) {
     return this.productService.getProductById(id).subscribe((data) => {
       this.product = data;
+      this.value = this.product.rating/2;
       this.images = data.images;
       console.log(data)
     });
