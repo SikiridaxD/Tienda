@@ -1,4 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
  
 
   login(token: string): void {
@@ -21,6 +22,13 @@ export class AuthService {
 
     if (!!localStorage.getItem('token')) return of(true);
     return of(false)
+  }
+
+  authenticate(username: string, password: string, expiresInMins: number = 30): Observable<any> {
+    const url = 'https://dummyjson.com/auth/login';
+    const body = { username, password, expiresInMins };
+
+    return this.http.post<any>(url, body);
   }
 
 }

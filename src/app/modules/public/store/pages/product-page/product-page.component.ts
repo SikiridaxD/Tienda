@@ -58,7 +58,7 @@ export class ProductPageComponent implements OnInit{
   getProduct(id: string) {
     return this.productService.getProductById(id).subscribe((data) => {
       this.product = data;
-      this.value = this.product.rating/2;
+      this.value = Math.floor(this.product.rating);
       this.images = data.images;
       console.log(data)
     });

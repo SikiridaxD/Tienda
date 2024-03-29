@@ -1,0 +1,40 @@
+.container{
+    width: 400px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.spacer{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.forgot{
+    font-size: 0.75rem;
+    color: #6f7980;
+}
+
+:host ::ng-deep .p-button {
+    width: 100%;
+    background-color: #6A9959;
+    color: #fff;
+    border-color: #6A9959;
+}
+
+:host ::ng-deep .p-password{
+    width: 100%;
+}
+
+:host ::ng-deep .p-button:hover {
+    width: 100%;
+    background-color: #73a461;
+    border-color: #73a461;
+    color: #fff;
+}
+
+input {
+    width: 100%;
+}
+
+  

@@ -1,11 +1,54 @@
-<div class="formgroup-inline">
-  <div class="field">
-    <label class="" htmlFor="username">Username</label>
-    <input pInputText id="username" aria-describedby="username-help" />
+<form 
+(submit)="submit()"
+[formGroup]="user">
+  <div class="container" >
+  <div class="flex justify-content-center">
+    <h1>Login</h1>
   </div>
-  <div class="field">
-    <label class="" htmlFor="password">Password</label>
-    <p-password [feedback]="false"></p-password>
+  <div>
+    <span class="p-float-label">
+      <input 
+      formControlName="username"
+      pInputText id="username" />
+      <label htmlFor="username">Username</label>
+  </span>
   </div>
-  <p-button label="Login" (onClick)="login()"></p-button>
+  <div class="spacer"></div>
+  <div>
+    <span class="p-float-label">
+      <p-password 
+      [feedback]="false" 
+      [toggleMask]="true"
+      id="password"
+      formControlName="password"
+      ></p-password>
+      <label htmlFor="password">Password</label>
+  </span>
+  </div>
+  <div class="spacer"></div>
+  <div  class="flex justify-content-end forgot">
+    Forgot password?
+  </div>
+  <div class="spacer"></div>
+  <div >
+    <p-button  
+    type="submit"
+    [disabled]="buttonState !== 'initial'"  
+    styleClass="p-button-raised flex justify-content-center">
+      <span *ngIf="buttonState === 'initial'">Login</span>
+      <span *ngIf="buttonState === 'success'">Success: you will redirect in a moment</span>
+      <i *ngIf="buttonState === 'loading'" class="pi pi-spin pi-spinner"></i>
+    </p-button>
+  </div>
+  <div class="spacer"></div>
+  <div 
+  style="font-size: 0.8rem;"
+  class="flex justify-content-center"
+  *ngIf="buttonState === 'loading'">
+    verifing, please wait
+  </div>
+
 </div>
+</form>
+
+

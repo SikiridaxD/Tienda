@@ -10,6 +10,23 @@ export class CartService {
 
   constructor(private productService: ProductService) {}
 
+  cartReload(){
+    const cart = localStorage.getItem('cart')
+    if (cart !== null) {
+      this.cart = JSON.parse(cart)
+    }
+  }
+
+  storeInLocal(){
+    localStorage.setItem('cart', JSON.stringify(this.cart))
+  }
+
+  removeElementById(id: number) {
+    // Filtramos el array para mantener solo los elementos cuyo producto tenga un ID diferente al especificado
+    this.cart = this.cart.filter(item => item.product.id !== id);
+  }
+
+
   storeInCart(id: string) {
     // Verificar si ya existe un elemento con el mismo id en el array
     const existingItem = this.cart.find(
@@ -40,6 +57,8 @@ export class CartService {
     return this.productService.getProductById(id).subscribe((data) => {
       newCartItem.product = data;
       this.cart.push(newCartItem);
+      this.storeInLocal();
     });
+
   }
 }

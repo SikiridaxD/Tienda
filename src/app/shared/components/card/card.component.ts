@@ -49,6 +49,6 @@ export class CardComponent implements OnInit {
     this.description = this.product.description;
     this.imageSrc = this.product.images[0];
     this.price = this.product.price;
-    this.value = this.product.rating/2;
+    this.value =  Math.floor(this.product.rating);
   }
 }
