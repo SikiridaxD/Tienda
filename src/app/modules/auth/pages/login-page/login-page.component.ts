@@ -18,6 +18,8 @@ export class LoginPageComponent {
     password: ['9uQFF1Lh', [Validators.required, Validators.minLength(4)]],
   });
 
+  token: string = '';
+
   buttonState: 'initial' | 'loading' | 'success' | 'error' = 'initial';
   value: string = '';
 
@@ -27,38 +29,33 @@ export class LoginPageComponent {
     private authService: AuthService
   ) {}
 
-  login2() {
-    this.authService.login('token');
-    this.router.navigate(['admin/products']);
-  }
-
   submit() {
     if (!this.user.valid) return;
     this.buttonState = 'loading';
     setTimeout(() => {
       if (this.user.value.username && this.user.value.password) {
-        const username: string = this.user.value.username;
-        const password: string = this.user.value.password;
+        const { username } = this.user.value;
+        const { password } = this.user.value;
         this.login(username, password);
       }
       if (this.buttonState === 'initial') return;
       setTimeout(()=>{this.router.navigate(['admin/products'])}, 2000)
     }, 5000);
-
   }
 
   login(username: string, password: string) {
     this.authService.authenticate(username, password).subscribe({
+      //Si se reciben datos correctos se cambia el estado del botón
       complete: () => {
         this.buttonState = 'success';
-        this.authService.login('token');
       },
+      //Si existe el token lo guarda en el local storage
+      next: (data) =>{
+        const { token } = data;
+        if ( token ) this.authService.setToken(token);
+      },
+      //Si no se reciben  datos correctos no hay cambios en el botón
       error:    () => (this.buttonState = 'initial'),
-
-      /**
-       * Implementar metdod con Token recibido de dummyJson
-       */
-      // console.log(data)
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Cart } from 'src/app/core/models/cart.model';
 import { ProductService } from 'src/app/modules/admin/products/services/product.service';
 
