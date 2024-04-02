@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CartItem } from 'src/app/core/models/cart.model';
 import { Product } from 'src/app/core/models/product.model';
-import { CartService } from 'src/app/modules/public/store/services/cart.service';
+import { ProductService } from 'src/app/modules/admin/products/services/product.service';
 
 @Component({
   selector: 'app-minicard',
@@ -32,10 +32,12 @@ export class MinicardComponent {
   imageSrc: string = '';
   price: number = 0;
 
-  constructor(private cartService: CartService){}
+  constructor(
+    private productService: ProductService){}
   
   ngOnInit(): void {
     this.updateProduct()
+
   }
 
   removeFromCart(){
@@ -46,11 +48,7 @@ export class MinicardComponent {
   
   }
 
-
-
   updateProduct(){
-    if ( this.item.product !== undefined ) {
-      this.product = this.item.product
-    }
+    this.productService.getProductById(this.item.id).subscribe( product => this.product = product)
   }
 }

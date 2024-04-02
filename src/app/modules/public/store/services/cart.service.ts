@@ -17,19 +17,8 @@ export class CartService {
     const savedCartItems = localStorage.getItem('cartItems');
     if (savedCartItems) {
       const parsedCartItems = JSON.parse(savedCartItems);
-      this.addProductDetails(parsedCartItems);
       this.cartItemsSubject.next(parsedCartItems);
     }
-  }
-
-  private addProductDetails(cartItems: any[]) {
-    cartItems.forEach(item => {
-      if (!item.product) {
-        this.productService.getProductById(item.id).subscribe(product => {
-          item.product = product; // Agregar el producto al elemento del carrito
-        });
-      }
-    });
   }
 
   private updateLocalStorage(cartItems: CartItem[]): void {
@@ -45,12 +34,10 @@ export class CartService {
 
     if (existingItem) {
       existingItem.quantity++;
-    } else {
-      let product
-      this.productService.getProductById(id).subscribe( data => product = data )
+    } 
+    else {
       currentItems.push({ 
         id: id,
-        product: product, 
         quantity: 1 });
     }
 

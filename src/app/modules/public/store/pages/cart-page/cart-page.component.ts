@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/core/models/product.model';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from 'src/app/core/models/cart.model';
+import { ProductService } from 'src/app/modules/admin/products/services/product.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -16,11 +17,13 @@ export class CartPageComponent implements OnInit {
   cart: CartItem[] = []
 
   constructor( 
-    private cartService: CartService, 
+    private cartService: CartService,
+    private productService: ProductService, 
     ){}
 
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe( data => this.cart = data)
+    this.addProductDetail()
     console.log( this.cart )
     this.getTotal()
   }
@@ -33,4 +36,15 @@ export class CartPageComponent implements OnInit {
   
     return this.total;
   }
+
+  clearCart(){
+    this.cartService.clearCart()
+  }
+
+  addProductDetail(){
+    for ( let item of this.cart){
+      this.productService.getProductById(item.id).subscribe( product => item.product = product)
+    }
+  }
 }
+
