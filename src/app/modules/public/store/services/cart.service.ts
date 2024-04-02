@@ -1,64 +1,76 @@
 import { Injectable } from '@angular/core';
-import { Cart } from 'src/app/core/models/cart.model';
+import { BehaviorSubject } from 'rxjs';
+import { CartItem } from 'src/app/core/models/cart.model';
 import { ProductService } from 'src/app/modules/admin/products/services/product.service';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  cart: Cart[] = [];
+  api: string = environment.rootApi;
+  
+  private cartItemsSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
+  cartItems$ = this.cartItemsSubject.asObservable();
 
-  constructor(private productService: ProductService) {}
-
-  cartReload(){
-    const cart = localStorage.getItem('cart')
-    if (cart !== null) {
-      this.cart = JSON.parse(cart)
+  constructor(private productService: ProductService) {
+    const savedCartItems = localStorage.getItem('cartItems');
+    if (savedCartItems) {
+      const parsedCartItems = JSON.parse(savedCartItems);
+      this.addProductDetails(parsedCartItems);
+      this.cartItemsSubject.next(parsedCartItems);
     }
   }
 
-  storeInLocal(){
-    localStorage.setItem('cart', JSON.stringify(this.cart))
-  }
-
-  removeElementById(id: number) {
-    // Filtramos el array para mantener solo los elementos cuyo producto tenga un ID diferente al especificado
-    this.cart = this.cart.filter(item => item.product.id !== id);
-  }
-
-
-  storeInCart(id: string) {
-    // Verificar si ya existe un elemento con el mismo id en el array
-    const existingItem = this.cart.find(
-      (item) => item.product.id?.toString() === id
-    );
-
-    // Si el elemento ya existe, aumenta la cantidad en uno
-    if (existingItem) return existingItem.quantity++;
-
-    //Si no existe el elemeto, se crea uno nuevo 
-    const newCartItem: Cart = {
-      product: {
-        title: '',
-        description: '',
-        price: 0,
-        discountPercentage: 0,
-        rating: 0,
-        stock: 0,
-        brand: '',
-        category: '',
-        thumbnail: '',
-        images: [],
-      },
-      quantity: 0,
-    };
-    newCartItem.quantity = 1;
-
-    return this.productService.getProductById(id).subscribe((data) => {
-      newCartItem.product = data;
-      this.cart.push(newCartItem);
-      this.storeInLocal();
+  private addProductDetails(cartItems: any[]) {
+    cartItems.forEach(item => {
+      if (!item.product) {
+        this.productService.getProductById(item.id).subscribe(product => {
+          item.product = product; // Agregar el producto al elemento del carrito
+        });
+      }
     });
+  }
 
+  private updateLocalStorage(cartItems: CartItem[]): void {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems.map(item => ({
+      id: item.id,
+      quantity: item.quantity
+    }))));
+  }
+
+  addItem(id: string) {
+    const currentItems = this.cartItemsSubject.getValue();
+    const existingItem = currentItems.find(i => i.id === id);
+
+    if (existingItem) {
+      existingItem.quantity++;
+    } else {
+      let product
+      this.productService.getProductById(id).subscribe( data => product = data )
+      currentItems.push({ 
+        id: id,
+        product: product, 
+        quantity: 1 });
+    }
+
+    this.cartItemsSubject.next(currentItems);
+    this.updateLocalStorage(currentItems);
+  }
+
+  removeItem(itemId: string) {
+    const currentItems = this.cartItemsSubject.getValue();
+    const index = currentItems.findIndex(item => item.id === itemId);
+
+    if (index !== -1) {
+      currentItems.splice(index, 1);
+      this.cartItemsSubject.next(currentItems);
+      this.updateLocalStorage(currentItems);
+    }
+  }
+
+  clearCart() {
+    this.cartItemsSubject.next([]);
+    localStorage.removeItem('cartItems');
   }
 }

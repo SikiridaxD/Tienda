@@ -1,17 +1,17 @@
 <div class="card flex justify-content-center">
-  <p-card [style]="{ width: '600px' }" header="{{ this.title }}">
+  <p-card [style]="{ width: '600px' }" header="{{ this.product.title }}">
     <ng-template pTemplate="content">
       <div class="grid">
         <div class="col-3">
-          <img style="width: 100px" src="{{ this.imageSrc }}" alt="" />
+          <img style="width: 100px" src="{{ this.product.thumbnail }}" alt="" />
         </div>
         <div class="col-9">
           <p class="m-0">
             <strong>
-              {{ this.price | currency }}
+              {{ this.product.price| currency }}
             </strong>
           </p>
-          quantity: {{ this.cart.quantity }}
+          quantity: {{ this.item.quantity }}
           <a (click)="removeFromCart()">Eliminar</a>
 
         </div>

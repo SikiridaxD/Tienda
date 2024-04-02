@@ -1,9 +1,9 @@
 <div class=" p-5 grid">
     <div class="col-6">
         <div *ngIf="this.cart.length === 0">Add something to your cart!</div>
-        <div *ngFor="let product of cart">
+        <div *ngFor="let cartItem of cart">
         <app-minicard
-        [cart]="product" ></app-minicard>
+        [item]="cartItem" ></app-minicard>
         </div>
     </div>
     <div class="col-6">

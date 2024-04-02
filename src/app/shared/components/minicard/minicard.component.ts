@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Cart } from 'src/app/core/models/cart.model';
+import { CartItem } from 'src/app/core/models/cart.model';
 import { Product } from 'src/app/core/models/product.model';
-import { ProductService } from 'src/app/modules/admin/products/services/product.service';
 import { CartService } from 'src/app/modules/public/store/services/cart.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class MinicardComponent {
   value: number = 4;
   
   @Input()
-  cart!: Cart;
+  item!: CartItem;
 
   product: Product = {
     title: '',
@@ -40,20 +39,18 @@ export class MinicardComponent {
   }
 
   removeFromCart(){
-    if ( this.cart.product.id !== undefined ){
-      this.cartService.removeElementById(this.cart.product.id);
-      this.cartService.storeInLocal();
-    }
+    // if ( this.cart.product.id !== undefined ){
+    //   // this.cartService.removeElementById(this.cart.product.id);
+    //   // this.cartService.storeInLocal();
+    // }
   
   }
 
 
 
   updateProduct(){
-    this.title = this.cart.product.title
-    this.category = this.cart.product.category
-    this.description = this.cart.product.description
-    this.imageSrc = this.cart.product.images[0]
-    this.price = this.cart.product.price
+    if ( this.item.product !== undefined ) {
+      this.product = this.item.product
+    }
   }
 }

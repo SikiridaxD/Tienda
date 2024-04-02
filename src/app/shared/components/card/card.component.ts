@@ -31,7 +31,7 @@ export class CardComponent implements OnInit {
 
   addToCart(id: string | undefined) {
     if (!id) return;
-    this.cartService.storeInCart(id);
+    this.cartService.addItem(id);
     this.saveProduct();
   }
 
