@@ -1,21 +1,47 @@
-<div class=" p-5 grid">
-    <div class="col-6">
-        <div *ngIf="this.cart.length === 0">Add something to your cart!</div>
-        <div *ngFor="let cartItem of cart">
-        <app-minicard
-        [item]="cartItem" ></app-minicard>
+<div class="">
+    <section 
+    style="
+    align-content: center;
+    height: 80vh
+    "
+    *ngIf="this.cart.length === 0">
+            <div class="flex justify-content-center align-content-center m-2">
+        <i 
+        style="
+            font-size: 2rem; 
+            color: #73a461;
+            border: 3px solid #73a461;
+            border-radius: 100%;
+            "
+        class="pi pi-shopping-cart p-4">
+        </i>
         </div>
-    </div>
-    <div class="col-6">
-        <div class="card flex justify-content-center">
-            <p-card header="Pucharse sumary">
-                <p class="m-0">
-                    Total : {{ this.total | currency }}
-                </p>
-                <button (click)="clearCart()">
-                    clear
-                </button>
-            </p-card>
+        <div 
+        style="font-size: 1.5rem;"        
+        class="flex justify-content-center m-3">
+            looks like you have not made your choice yet!
         </div>
-    </div>
+    </section>
+    <section 
+    class="grid p-2"
+    *ngIf="this.cart.length !== 0">
+        <div class="col-6">
+            <div *ngFor="let cartItem of cart">
+            <app-minicard
+            [item]="cartItem" ></app-minicard>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card flex justify-content-center">
+                <p-card header="Pucharse sumary">
+                    <p class="m-0">
+                        Total : {{ this.total | currency }}
+                    </p>
+                    <button (click)="clearCart()">
+                        clear
+                    </button>
+                </p-card>
+            </div>
+        </div>
+    </section>
 </div>

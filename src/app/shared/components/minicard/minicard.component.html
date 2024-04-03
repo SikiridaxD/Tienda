@@ -8,17 +8,22 @@
         <div class="col-9">
           <p class="m-0">
             <strong>
-              {{ this.product.price| currency }}
+              {{ this.product.price * this.item.quantity | currency }}
             </strong>
           </p>
           quantity: {{ this.item.quantity }}
           <a (click)="removeFromCart()">Eliminar</a>
-
         </div>
       </div>
       <p-divider></p-divider>
     </ng-template>
   </p-card>
 </div>
+
+
+
+
+
+
 
 

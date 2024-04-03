@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { CartItem } from 'src/app/core/models/cart.model';
 import { Product } from 'src/app/core/models/product.model';
 import { CartService } from 'src/app/modules/public/store/services/cart.service';
 
@@ -22,25 +23,31 @@ export class CardComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private messageService: MessageService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.updateProduct();
   }
 
-  addToCart(id: string | undefined) {
-    if (!id) return;
-    this.cartService.addItem(id);
-    this.saveProduct();
+  addToCart() {
+    if (this.product.id !== undefined) {
+      const newItem: CartItem = {
+        id: this.product.id.toString(),
+        product: this.product,
+        quantity: 1,
+      };
+      this.cartService.addItem(newItem);
+    }
   }
 
   saveProduct() {
-  () =>  this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Product added to cart',
-    });
+    () =>
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Product added to cart',
+      });
   }
 
   updateProduct() {
@@ -49,6 +56,6 @@ export class CardComponent implements OnInit {
     this.description = this.product.description;
     this.imageSrc = this.product.images[0];
     this.price = this.product.price;
-    this.value =  Math.floor(this.product.rating);
+    this.value = Math.floor(this.product.rating);
   }
 }

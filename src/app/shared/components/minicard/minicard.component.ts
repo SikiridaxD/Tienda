@@ -14,6 +14,8 @@ export class MinicardComponent {
   @Input()
   item!: CartItem;
 
+  
+
   product: Product = {
     title: '',
     description: '',

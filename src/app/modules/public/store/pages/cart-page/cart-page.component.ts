@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/modules/admin/products/services/product.
   styleUrls: ['./cart-page.component.scss']
 })
 export class CartPageComponent implements OnInit {
+
   products: Product[] = []
 
   total: number = 0;
@@ -21,8 +22,10 @@ export class CartPageComponent implements OnInit {
     private productService: ProductService, 
     ){}
 
-  ngOnInit(): void {
-    this.cartService.cartItems$.subscribe( data => this.cart = data)
+  async ngOnInit() {
+    this.cartService.cartItems.subscribe( data => {
+      this.cart = data
+    })
     this.addProductDetail()
     console.log( this.cart )
     this.getTotal()

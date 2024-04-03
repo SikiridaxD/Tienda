@@ -9,55 +9,54 @@ import { environment } from 'src/environments/environment.development';
 })
 export class CartService {
   api: string = environment.rootApi;
-  
-  private cartItemsSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
-  cartItems$ = this.cartItemsSubject.asObservable();
 
-  constructor(private productService: ProductService) {
+  private cartProducts: CartItem[] = [];
+  private _cartItemsSubject: BehaviorSubject<CartItem[]> ;
+  get cartItems() {
+    return this._cartItemsSubject.asObservable();
+  }
+
+  constructor() {
+    this._cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
     const savedCartItems = localStorage.getItem('cartItems');
     if (savedCartItems) {
-      const parsedCartItems = JSON.parse(savedCartItems);
-      this.cartItemsSubject.next(parsedCartItems);
+      this.cartProducts = JSON.parse(savedCartItems);
+      this._cartItemsSubject.next(this.cartProducts);
     }
   }
 
   private updateLocalStorage(cartItems: CartItem[]): void {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems.map(item => ({
-      id: item.id,
-      quantity: item.quantity
-    }))));
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
 
-  addItem(id: string) {
-    const currentItems = this.cartItemsSubject.getValue();
-    const existingItem = currentItems.find(i => i.id === id);
+  addItem(product: CartItem) {
+    const currentItems = this.cartProducts;
+    const existingItem = currentItems.find((i) => i.id === product.id);
 
     if (existingItem) {
       existingItem.quantity++;
-    } 
-    else {
-      currentItems.push({ 
-        id: id,
-        quantity: 1 });
+    } else {
+      this.cartProducts.push(product);
     }
 
-    this.cartItemsSubject.next(currentItems);
-    this.updateLocalStorage(currentItems);
+    this._cartItemsSubject.next(this.cartProducts);
+    this.updateLocalStorage(this.cartProducts);
   }
 
   removeItem(itemId: string) {
-    const currentItems = this.cartItemsSubject.getValue();
-    const index = currentItems.findIndex(item => item.id === itemId);
+    const currentItems = this.cartProducts;
+    const index = currentItems.findIndex((item) => item.id === itemId);
 
     if (index !== -1) {
       currentItems.splice(index, 1);
-      this.cartItemsSubject.next(currentItems);
+      this._cartItemsSubject.next(currentItems);
       this.updateLocalStorage(currentItems);
     }
   }
 
   clearCart() {
-    this.cartItemsSubject.next([]);
+    this.cartProducts = [];
+    this._cartItemsSubject.next(this.cartProducts);
     localStorage.removeItem('cartItems');
   }
 }
