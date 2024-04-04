@@ -1,29 +1,85 @@
-<div class="card flex justify-content-center">
-  <p-card [style]="{ width: '600px' }" header="{{ this.product.title }}">
-    <ng-template pTemplate="content">
-      <div class="grid">
-        <div class="col-3">
-          <img style="width: 100px" src="{{ this.product.thumbnail }}" alt="" />
-        </div>
-        <div class="col-9">
-          <p class="m-0">
-            <strong>
-              {{ this.product.price * this.item.quantity | currency }}
-            </strong>
-          </p>
-          quantity: {{ this.item.quantity }}
-          <a (click)="removeFromCart()">Eliminar</a>
+<div class="background">
+  <div class="grid">
+    <div class="col-2">
+      <div
+        style="height: 100%"
+        class="flex justify-content-center align-items-center"
+      >
+        <img
+          style="border-radius: 10px; max-height: 50px"
+          src="{{ this.product.thumbnail }}"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="col-4">
+      <div
+        style="height: 100%"
+        class="flex justify-content-start align-items-center"
+      >
+        <div>
+          <div class="p-1">
+            <strong>{{ this.product.title }}</strong>
+          </div>
+          <div class="p-1">
+            <small style="color: #8c91a2">{{ this.product.brand }}</small>
+          </div>
         </div>
       </div>
-      <p-divider></p-divider>
-    </ng-template>
-  </p-card>
+    </div>
+    <div style=" padding: 0;" class="col-2 text-center">
+      <div
+        style="height: 100%;"
+        class="flex justify-content-center align-items-center"
+      >
+          <div class="p-inputgroup">
+            <button
+              type="button"
+              id="decrement-button"
+              data-input-counter-decrement="counter-input"
+              class="p-button p-button-text buttonl"
+            >
+              <i class="pi pi-minus"></i>
+            </button>
+            <p-inputNumber
+              [min]="0"
+              [max]="100"
+              id="counter-input"
+              [(ngModel)]="this.item.quantity"
+            ></p-inputNumber>
+            <button
+              type="button"
+              id="increment-button"
+              data-input-counter-increment="counter-input"
+              class="p-button p-button-text buttonr"
+            >
+              <i class="pi pi-plus"></i>
+            </button>
+          </div>
+      </div>
+    </div>
+    <div class="col-3 text-center">
+      <div
+        style="height: 100%; "
+        class="flex justify-content-center align-items-center"
+      >
+        <strong>{{
+          this.product.price * this.item.quantity | currency
+        }}</strong>
+      </div>
+    </div>
+    <div class="col-1 text-center">
+      <div
+        style="height: 100%"
+        class="flex justify-content-center align-items-center"
+      >
+        <span class="pi pi-trash"></span>
+
+        <div class="card flex justify-content-center gap-2">
+          <p-toast></p-toast>
+          <p-button icon="pi pi-check" label="Confirm"></p-button>
+      </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-
-
-
-
-
-

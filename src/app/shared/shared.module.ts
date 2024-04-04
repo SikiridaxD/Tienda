@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from 'primeng/sidebar';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 
@@ -46,6 +47,8 @@ import { MinicardComponent } from './components/minicard/minicard.component';
     RatingModule,
     ReactiveFormsModule,
     FormsModule,
+    ToastModule,
+    ConfirmDialogModule,
   ],
   exports: [
     ButtonModule,
@@ -69,6 +72,7 @@ import { MinicardComponent } from './components/minicard/minicard.component';
     TableModule,
     ToastModule,
     FormsModule,
+
   ]
 })
 export class SharedModule { }

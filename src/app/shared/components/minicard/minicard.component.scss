@@ -1,0 +1,40 @@
+.background {
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 1rem 0;
+  padding: 0 5px;
+}
+
+.p-button-text {
+    padding: 0.25rem 0.25rem; /* Reduce el padding del botón */
+    font-size: 0.5rem; /* Reduce el tamaño de la fuente del botón */
+}
+
+.buttonl{
+    border-radius: 5px 0 0 5px;
+}
+
+.buttonr{
+    border-radius: 0 5px 5px 0;
+}
+
+:host ::ng-deep p-inputnumber{
+    height: 25px;
+    font-size: 10px;
+    padding: 0;
+    text-align: center ;
+}
+
+:host ::ng-deep .p-button {
+    height: 25px;
+    background-color: #6A9959;
+    color: #fff;
+    border-color: #6A9959;
+}
+
+:host ::ng-deep .p-button:hover {
+    height: 25px;
+    background-color: #73a461;
+    border-color: #73a461;
+    color: #fff;
+}

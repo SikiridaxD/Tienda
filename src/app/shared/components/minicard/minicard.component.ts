@@ -3,6 +3,8 @@ import { CartItem } from 'src/app/core/models/cart.model';
 import { Product } from 'src/app/core/models/product.model';
 import { ProductService } from 'src/app/modules/admin/products/services/product.service';
 
+
+
 @Component({
   selector: 'app-minicard',
   templateUrl: './minicard.component.html',
@@ -13,8 +15,6 @@ export class MinicardComponent {
   
   @Input()
   item!: CartItem;
-
-  
 
   product: Product = {
     title: '',
@@ -28,14 +28,19 @@ export class MinicardComponent {
     thumbnail: '',
     images: []
   };
+  
   title: string = '';
   category: string = '';
   description: string = '';
   imageSrc: string = '';
   price: number = 0;
 
+  quantity: number = 1;
+
   constructor(
-    private productService: ProductService){}
+    
+    private productService: ProductService,
+    ){}
   
   ngOnInit(): void {
     this.updateProduct()
@@ -53,4 +58,27 @@ export class MinicardComponent {
   updateProduct(){
     this.productService.getProductById(this.item.id).subscribe( product => this.product = product)
   }
+
+
+//   confirm1() {
+//     this.confirmationService.confirm({
+//         message: 'Are you sure that you want to proceed?',
+//         header: 'Confirmation',
+//         icon: 'pi pi-exclamation-triangle',
+//         accept: () => {
+//             this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+//         },
+//         reject: (type: any) => {
+//             switch (type) {
+//                 case ConfirmEventType.REJECT:
+//                     this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+//                     break;
+//                 case ConfirmEventType.CANCEL:
+//                     this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
+//                     break;
+//             }
+//         }
+//     });
+// }
+
 }

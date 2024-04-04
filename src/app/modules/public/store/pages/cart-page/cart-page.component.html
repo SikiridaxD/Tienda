@@ -1,47 +1,134 @@
 <div class="">
-    <section 
-    style="
-    align-content: center;
-    height: 80vh
-    "
-    *ngIf="this.cart.length === 0">
-            <div class="flex justify-content-center align-content-center m-2">
-        <i 
+  <section
+    style="align-content: center; height: 80vh"
+    *ngIf="this.cart.length === 0"
+  >
+    <div class="flex justify-content-center align-content-center m-2">
+      <i
         style="
-            font-size: 2rem; 
-            color: #73a461;
-            border: 3px solid #73a461;
-            border-radius: 100%;
-            "
-        class="pi pi-shopping-cart p-4">
-        </i>
+          font-size: 2rem;
+          color: #73a461;
+          border: 3px solid #73a461;
+          border-radius: 100%;
+        "
+        class="pi pi-shopping-cart p-4"
+      >
+      </i>
+    </div>
+    <div style="font-size: 1.5rem" class="flex justify-content-center m-3">
+      looks like you have not made your choice yet!
+    </div>
+  </section>
+  <section class="grid p-2" *ngIf="this.cart.length !== 0">
+    <div class="col-1"></div>
+    <div class="col-6">
+      <div *ngFor="let cartItem of cart">
+        <app-minicard [item]="cartItem"></app-minicard>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="p-fluid p-grid p-justify-center">
+        <div class="p-col-12 p-md-6">
+          <div
+            style="background-color: #73a461; color: #fff"
+            class="p-card p-p-4 p-4"
+          >
+            <h2>Card details</h2>
+            <form>
+              <div class="grid">
+                <div class="col-12">
+                  <div class="p-field">
+                    <label style="font-size: 0.75rem" for="nombre"
+                      >Nombre</label
+                    >
+                    <input
+                      style="background-color: #a8d896"
+                      type="text"
+                      id="nombre"
+                      class="p-inputtext"
+                      placeholder="Nombre completo"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="p-field">
+                    <label style="font-size: 0.75rem" for="numero-tarjeta"
+                      >Número de Tarjeta</label
+                    >
+                    <input
+                      style="background-color: #a8d896"
+                      type="text"
+                      id="numero-tarjeta"
+                      class="p-inputtext"
+                      placeholder="XXXX-XXXX-XXXX-XXXX"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="spacer"></div>
+                <div class="col-6">
+                  <div class="p-field">
+                    <div class="p-col">
+                      <label style="font-size: 0.75rem" for="cvv">CVV</label>
+                      <input
+                        style="background-color: #a8d896"
+                        type="text"
+                        id="cvv"
+                        class="p-inputtext"
+                        placeholder="CVV"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-col">
+                    <label style="font-size: 0.75rem" for="fecha-expiracion"
+                      >Fecha de Expiración</label
+                    >
+                    <input
+                      style="background-color: #a8d896"
+                      type="text"
+                      id="fecha-expiracion"
+                      class="p-inputtext"
+                      placeholder="MM/AA"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <p-divider></p-divider>
+
+              <div class="grid">
+                <div class="col-12">
+                  <div class="flex justify-content-between">
+                    <span>Subtotal:</span>
+                    <span>{{ this.total | currency }}</span>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="flex justify-content-between">
+                    <span>Shipping:</span>
+                    <span>{{ 20 | currency }}</span>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="flex justify-content-between">
+                    <span>Total:</span>
+                    <span>{{ this.total + 20 | currency }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="p-button">
+                Realizar Pago
+              </button>
+            </form>
+          </div>
         </div>
-        <div 
-        style="font-size: 1.5rem;"        
-        class="flex justify-content-center m-3">
-            looks like you have not made your choice yet!
-        </div>
-    </section>
-    <section 
-    class="grid p-2"
-    *ngIf="this.cart.length !== 0">
-        <div class="col-6">
-            <div *ngFor="let cartItem of cart">
-            <app-minicard
-            [item]="cartItem" ></app-minicard>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card flex justify-content-center">
-                <p-card header="Pucharse sumary">
-                    <p class="m-0">
-                        Total : {{ this.total | currency }}
-                    </p>
-                    <button (click)="clearCart()">
-                        clear
-                    </button>
-                </p-card>
-            </div>
-        </div>
-    </section>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </section>
 </div>
