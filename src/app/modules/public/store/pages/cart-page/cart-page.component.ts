@@ -31,13 +31,15 @@ export class CartPageComponent implements OnInit {
     this.getTotal()
   }
 
-  getTotal(){
-    if (this.cart.length === 0) return;
+  getTotal():number {
+    if (this.cart.length === 0) return 0;
+
+    let total =0;
     for (const item of this.cart) {
-      if ( item.product !== undefined) this.total += item.product.price * item.quantity;
-     }
-  
-    return this.total;
+      if ( item.product !== undefined) 
+      total += item.product.price * item.quantity;
+     }  
+    return total;
   }
 
   clearCart(){

@@ -1,4 +1,24 @@
+@import "src/styles.scss";
+
+$gray:#969f9f;
+
 .border{
     border-radius: 10px;
-    border: 1px solid grey;
+    border: 1px solid $gray;
 }
+
+label.price-amount {
+
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-right: 8px;
+
+    &.lined{    
+        text-decoration: line-through !important;
+        color: $gray;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+

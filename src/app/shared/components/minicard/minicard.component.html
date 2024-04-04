@@ -37,11 +37,12 @@
               type="button"
               id="decrement-button"
               data-input-counter-decrement="counter-input"
-              class="p-button p-button-text buttonl"
+              class="p-button p-button-text buttonl button-plus-minus"
             >
               <i class="pi pi-minus"></i>
             </button>
             <p-inputNumber
+            styleClass="text-center"
               [min]="0"
               [max]="100"
               id="counter-input"
@@ -51,7 +52,7 @@
               type="button"
               id="increment-button"
               data-input-counter-increment="counter-input"
-              class="p-button p-button-text buttonr"
+              class="p-button p-button-text buttonr button-plus-minus"
             >
               <i class="pi pi-plus"></i>
             </button>
@@ -73,12 +74,9 @@
         style="height: 100%"
         class="flex justify-content-center align-items-center"
       >
-        <span class="pi pi-trash"></span>
-
-        <div class="card flex justify-content-center gap-2">
-          <p-toast></p-toast>
-          <p-button icon="pi pi-check" label="Confirm"></p-button>
-      </div>
+       <!-- <span class="pi pi-trash" (click)="confirm1()"></span>-->
+        <p-button icon="pi pi-trash"  (click)="confirm1()" styleClass="p-button-rounded p-button-sm p-button-outlined"></p-button>
+      
       </div>
     </div>
   </div>
