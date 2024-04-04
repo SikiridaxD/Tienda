@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
 import { CartItem } from 'src/app/core/models/cart.model';
 import { ProductService } from 'src/app/modules/admin/products/services/product.service';
@@ -16,7 +17,7 @@ export class CartService {
     return this._cartItemsSubject.asObservable();
   }
 
-  constructor() {
+  constructor(private messageService:MessageService) {
     this._cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
     const savedCartItems = localStorage.getItem('cartItems');
     if (savedCartItems) {
@@ -38,7 +39,7 @@ export class CartService {
     } else {
       this.cartProducts.push(product);
     }
-
+    this.messageService.add({ severity: 'success', summary: 'Elemento agregado correctamente', detail: product.product?.title + ' agregado al carrito.' });
     this._cartItemsSubject.next(this.cartProducts);
     this.updateLocalStorage(this.cartProducts);
   }

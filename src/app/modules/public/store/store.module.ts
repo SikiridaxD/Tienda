@@ -7,6 +7,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { MessageService } from 'primeng/api';
+import { CartService } from './services/cart.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 
@@ -23,7 +25,9 @@ import { MessageService } from 'primeng/api';
     SharedModule,
   ],
   providers:[
-    MessageService
+    CartService,
+    MessageService,
+    
   ]
 })
 export class StoreModule { }

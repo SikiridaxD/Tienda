@@ -64,6 +64,11 @@ export class ProductPageComponent implements OnInit{
     });
   }
 
+  getDiscountPrice():number{
+    return  this.product.price - (this.product.price / 100 * this.product.discountPercentage) ;
+  }
+
+
   getSeverity (product: any) {
     switch (product.inventoryStatus) {
         case 'INSTOCK':

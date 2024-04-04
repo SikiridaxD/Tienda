@@ -19,11 +19,13 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
+import { BadgeModule } from 'primeng/badge';
 
 
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { CardComponent } from './components/card/card.component';
 import { MinicardComponent } from './components/minicard/minicard.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { MinicardComponent } from './components/minicard/minicard.component';
     FormsModule,
     ToastModule,
     ConfirmDialogModule,
+    BadgeModule
   ],
   exports: [
     ButtonModule,
@@ -72,7 +75,12 @@ import { MinicardComponent } from './components/minicard/minicard.component';
     TableModule,
     ToastModule,
     FormsModule,
-
+    ConfirmDialogModule,
+    BadgeModule
+  ],
+  providers:[
+    ConfirmationService,
+    MessageService
   ]
 })
 export class SharedModule { }
