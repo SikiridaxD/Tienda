@@ -8,9 +8,7 @@
     <a
       [routerLink]="['/store/home']"
       class="p-element flex align-items-center cursor-pointer surface-0 text-900 no-underline"
-      ><i 
-      style="color: #73a461;"
-      class="pi pi-shopping-bag mr-2"></i>
+      ><i style="color: #73a461" class="pi pi-shopping-bag mr-2"></i>
     </a>
     <p-button
       (click)="toggleSidebar()"
@@ -21,18 +19,15 @@
   <div
     class="flex-grow-1 justify-content-center hidden lg:flex absolute lg:static w-full left-0 top-100 z-1 shadow-2 lg:shadow-none surface-overlay"
   >
-  <app-search-box></app-search-box>
-
-</div>
+    <app-search-box></app-search-box>
+  </div>
   <div
     class="p-element flex-grow-1 justify-content-end hidden lg:flex absolute lg:static w-full left-0 top-100 z-1 shadow-2 lg:shadow-none surface-overlay"
   >
     <a
       [routerLink]="['/store/cart']"
       class="flex align-items-center cursor-pointer surface-0 text-900 no-underline"
-      ><i 
-      style="color: #73a461;"
-      class="pi pi-shopping-cart m-2"></i>
+      ><i style="color: #73a461" class="pi pi-shopping-cart m-2"></i>
     </a>
   </div>
 </div>
@@ -46,12 +41,10 @@
   </p-sidebar>
 </div>
 
-<div class="flex  ">
- 
+<div class="flex">
   <div class="flex flex-grow-1 justify-content-center">
     <div class="p-3">
       <router-outlet></router-outlet>
-  </div>
+    </div>
   </div>
 </div>
-

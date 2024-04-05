@@ -12,6 +12,7 @@ import { CartService } from 'src/app/modules/public/store/services/cart.service'
 export class CardComponent implements OnInit {
   value: number = 0;
 
+
   @Input()
   product!: Product;
 

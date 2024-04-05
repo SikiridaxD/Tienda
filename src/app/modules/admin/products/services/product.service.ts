@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Observable, map } from 'rxjs';
 import { Product } from 'src/app/core/models/product.model';
+import { CategoryCall } from 'src/app/core/models/categories-call.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -40,6 +41,11 @@ export class ProductService {
   getCategories() {
     const url = ` ${this.api}/products/categories `;
     return this.http.get<string[]>(url);
+  }
+
+  getProductsByCategory(category: string){
+    const url = `${this.api}/products/category/${category}`;
+    return this.http.get<CategoryCall>(url);
   }
 
   searchProducts(search: string) { 

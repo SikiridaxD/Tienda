@@ -1,64 +1,108 @@
-
 <div class="flex justify-content-center flex-wrap">
-<p-card styleClass="flex">
-<div class="grid p-5">
-  <div class="col-6">
-    <div class="card">
-        <p-galleria [value]="images" [showIndicators]="true" [showThumbnails]="false" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }">
+  <p-card styleClass="flex">
+    <div class="grid p-5">
+      <div class="col-6">
+        <div class="card">
+          <p-galleria
+            [value]="images"
+            [showIndicators]="true"
+            [showThumbnails]="false"
+            [responsiveOptions]="responsiveOptions"
+            [containerStyle]="{ 'max-width': '640px', 'max-height': '300px' }"
+          >
             <ng-template pTemplate="item" let-item>
-                <img [src]="item" style="width: 100%; display: block;" />
+              <img [src]="item" style="width: 100%; display: block" />
             </ng-template>
-        </p-galleria>
-    </div>
-</div>
-  <div class="col-6  px-4">
-    <div>
-    <h2 class="mt-0">{{ this.product.title  }}</h2>    
-    </div>
-        <div class="card flex justify-content-start">
-            <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
+          </p-galleria>
         </div>
-    <div class="mt-4 mb-4">
-        <div class="price-section" >
-           <label class="price-amount" [ngClass]="{'lined': this.product.discountPercentage > 0}" >{{ this.product.price | currency }}</label>
-           <label class="price-amount price-discount">{{ getDiscountPrice() | currency }}</label><i class=" p-text-secondary" pBadge style="font-size: 2rem" [value]="'-'+this.product.discountPercentage +'%'"></i>
-        </div>
-    </div>
-    <div class="mb-2"><strong class="mr-2">Brand:</strong>{{this.product.brand }}</div>
-    <div class="mb-2"><strong class="mr-2">Category:</strong>{{this.product.category | titlecase }}</div>
-    <p-divider></p-divider>
-    <div style="max-width: 400px;">{{ this.product.description }} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
-    <p-divider></p-divider>
-    <div>
-        Stock: {{ this.product.stock }}
+      </div>
+      <div class="col-6 px-4">
         <div>
-            <div>
-                <p-inputNumber 
-                [(ngModel)]="quantity"
-                [showButtons]="true" 
-                buttonLayout="horizontal" 
-                spinnerMode="horizontal" 
-                inputId="vertical" 
-                decrementButtonClass="p-button-secondary"
-                incrementButtonClass="p-button-secondary" 
-                incrementButtonIcon="pi pi-plus" 
-                decrementButtonIcon="pi pi-minus"
-                [min]="1"></p-inputNumber>
-            </div>
-            <div>
-                <p-button styleClass="mt-3"
-                label="Add to cart"
-                ></p-button> 
-            </div>
+          <h2 class="mt-0">{{ this.product.title }}</h2>
         </div>
+        <div class="card flex justify-content-start">
+          <p-rating
+            [(ngModel)]="value"
+            [readonly]="true"
+            [cancel]="false"
+          ></p-rating>
+        </div>
+        <div class="mt-4 mb-4">
+          <div class="price-section">
+            <label
+              class="price-amount"
+              [ngClass]="{ lined: this.product.discountPercentage > 0 }"
+              >{{ this.product.price | currency }}</label
+            >
+            <label class="price-amount price-discount">{{
+              getDiscountPrice() | currency
+            }}</label
+            ><i
+              class="p-text-secondary"
+              pBadge
+              style="font-size: 2rem"
+              [value]="'-' + this.product.discountPercentage + '%'"
+            ></i>
+          </div>
+        </div>
+        <div class="mb-2">
+          <strong class="mr-2">Brand:</strong>{{ this.product.brand }}
+        </div>
+        <div class="mb-2">
+          <strong class="mr-2">Category:</strong
+          >{{ this.product.category | titlecase }}
+        </div>
+        <p-divider></p-divider>
+        <div style="max-width: 400px">
+          {{ this.product.description }} Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <p-divider></p-divider>
+        <div>
+          Stock: {{ this.product.stock }}
+          <div>
+            <div>
+              <p-inputNumber
+                [(ngModel)]="quantity"
+                [showButtons]="true"
+                buttonLayout="horizontal"
+                spinnerMode="horizontal"
+                inputId="vertical"
+                decrementButtonClass="p-button-secondary"
+                incrementButtonClass="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                [min]="1"
+              ></p-inputNumber>
+            </div>
+            <div>
+              <p-button styleClass="mt-3" label="Add to cart"></p-button>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
     </div>
-    <div>
-        
+  </p-card>
 
-    </div>
+  <!-- Este contenedor muestra sugerencias basadas en la categoría del producto seleccionado -->
+  <div class="flex mt-1">
+    <p-card styleClass="flex">
+      <div style="display: block; width: 79vw" class="mb-3 mt-2">
+        <strong> Also see...</strong>
+      </div>
+      <div class="grid" *ngIf="loading">
+        <p-skeleton class="col-4" height="400px"></p-skeleton>
+        <p-skeleton class="col-4" height="400px"></p-skeleton>
+        <p-skeleton class="col-4" height="400px"></p-skeleton>
+      </div>
+      <div class="grid " *ngIf="!loading">
+        <div *ngFor="let item of relatedProducts" class="col-4">
+          <app-card [product]="item"></app-card>
+        </div>
+      </div>
+    </p-card>
   </div>
- 
-</div>
-
-</p-card>
 </div>

@@ -1,11 +1,14 @@
-.border-top-rounded{
-    border-radius:  10px 10px 0 0 ;
+.border-top-rounded {
+  border-radius: 10px 10px 0 0;
 }
 
-img{
-    max-height: 150px;
+.card-title {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Esto agrega puntos suspensivos (...) al final del texto truncado */
+  white-space: nowrap; /* Esto evita que el texto se divida en varias líneas */
 }
 
-.hidden{
-    overflow: hidden;
+:host ::ng-deep button{
+    border-radius: 25px ;
 }

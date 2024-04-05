@@ -1,19 +1,38 @@
-<div class="card flex justify-content-center">
+<div
+  class="p-fluid flex flex-initial justify-content-center"
+  style="max-width: 400px"
+>
   <p-card
     class="pt-0"
-    header="{{ this.title }}"
     subheader="{{ this.category }}"
-    [style]="{ width: '320px' }"
+    [style]="{heigth: '300px',width: '300px'}"
   >
-    <ng-template pTemplate="header" class="hidden">
-      <img class="border-top-rounded" alt="Card" src="{{ this.imageSrc }}" />
+    <ng-template pTemplate="title">
+      <div class="card-title">
+        {{ this.title }}
+      </div>
     </ng-template>
 
-    <div class="card flex justify-content-between">
-      <p-rating [(ngModel)]="value" [readonly]="true" [cancel]="false"></p-rating>
-      <div class="">
+    <ng-template pTemplate="header" class="hidden">
+      <a href="/store/product/{{ product.id }}">
+        <img
+          class="border-top-rounded"
+          alt="Card"
+          src="{{ this.imageSrc }}"
+          style="max-width: 400px; max-height: 150px; overflow: hidden"
+        />
+      </a>
+    </ng-template>
+
+    <div class="flex flex-wrap justify-content-between">
+      <div class="mb-1">
         {{ this.price | currency }}
       </div>
+      <p-rating
+        [(ngModel)]="value"
+        [readonly]="true"
+        [cancel]="false"
+      ></p-rating>
     </div>
 
     <ng-template pTemplate="footer">
@@ -22,13 +41,6 @@
         icon="pi pi-cart-plus"
         styleClass="p-button-outlined"
         (onClick)="addToCart()"
-      ></p-button>
-      <p-button
-        label="View"
-        icon="pi pi-tag"
-        styleClass="p-button-outlined"
-        [style]="{ 'margin-left': '.5em' }"
-        [routerLink]="['/store/product/', product.id]"
       ></p-button>
     </ng-template>
   </p-card>

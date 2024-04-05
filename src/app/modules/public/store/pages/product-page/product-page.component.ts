@@ -6,10 +6,11 @@ import { ProductService } from 'src/app/modules/admin/products/services/product.
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.scss']
+  styleUrls: ['./product-page.component.scss'],
 })
-export class ProductPageComponent implements OnInit{
-
+export class ProductPageComponent implements OnInit {
+  relatedProducts: Product[] = [];
+  loading: boolean = true;
   product: Product = {
     title: '',
     description: '',
@@ -20,39 +21,28 @@ export class ProductPageComponent implements OnInit{
     brand: '',
     category: '',
     thumbnail: '',
-    images: []
+    images: [],
   };
   images: any[] = [];
   value: number = 0;
   responsiveOptions: any[] = [];
-  quantity: number = 1
-
-  
+  quantity: number = 1;
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService,
-  ){}
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((param: ParamMap) => {
       let id = param.get('id') || '0';
       this.getProduct(id);
-      this.responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 5
-        },
-        {
-            breakpoint: '768px',
-            numVisible: 3
-        },
-        {
-            breakpoint: '560px',
-            numVisible: 1
-        }
-    ];
-    });
+    })
+    setTimeout(() => {
+      this.getRelatedProducts( this.product.category );
+    }, 600);
+    
+    ;
   }
 
   getProduct(id: string) {
@@ -60,30 +50,32 @@ export class ProductPageComponent implements OnInit{
       this.product = data;
       this.value = Math.floor(this.product.rating);
       this.images = data.images;
-      console.log(data)
     });
   }
 
-  getDiscountPrice():number{
-    return  this.product.price - (this.product.price / 100 * this.product.discountPercentage) ;
+  getRelatedProducts(category: string) {
+    this.productService
+      .getProductsByCategory(category)
+      .subscribe((data) => {
+        const { products }  = data
+        const uniqueProducts = this.removeDuplicateProduct(products, this.product.id!)
+        this.relatedProducts =  uniqueProducts.slice(0, 3);
+        this.loading = false;
+      });
+  }
+  
+  removeDuplicateProduct(products: Product[], productId: number) {
+    // Filtrar el array para eliminar el producto seleccionado por su ID
+    return this.relatedProducts = products.filter( product => product.id !== productId );
+  }
+
+  getDiscountPrice(): number {
+    return (
+      this.product.price -
+      (this.product.price / 100) * this.product.discountPercentage
+    );
   }
 
 
-  getSeverity (product: any) {
-    switch (product.inventoryStatus) {
-        case 'INSTOCK':
-            return 'success';
-
-        case 'LOWSTOCK':
-            return 'warning';
-
-        case 'OUTOFSTOCK':
-            return 'danger';
-
-        default:
-            return null;
-    }
-};
-
-
+ 
 }

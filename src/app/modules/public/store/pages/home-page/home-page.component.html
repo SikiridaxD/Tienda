@@ -1,6 +1,18 @@
 <h2>Productos</h2>
 
 
+<div class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
+    <div class="font-bold mr-8">🔥 Hot Deals!</div>
+    <div class="align-items-center hidden lg:flex">
+        <span class="line-height-3">Libero voluptatum atque exercitationem praesentium provident odit.</span>
+    </div>
+    <a class="flex align-items-center ml-2 mr-8">
+        <a class="text-white" href="#"><span class="underline font-bold">Learn More</span></a>
+    </a>
+    <a pRipple class="flex align-items-center no-underline justify-content-center border-circle text-gray-50 hover:bg-bluegray-700 cursor-pointer transition-colors transition-duration-150" style="width:2rem; height: 2rem">
+        <i class="pi pi-times"></i>
+    </a>
+</div>
 
 <div class="grid grid-nogutter surface-section text-800">
     <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
@@ -13,17 +25,17 @@
             <button pButton pRipple label="Live Demo" type="button" class="p-button-outlined"></button>
         </section>
     </div>
-    <div class="col-12 md:col-6 overflow-hidden">
-        <img src="assets/images/blocks/hero/hero-1.png" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
+    <div style="width: 350px; height: 350px;" class="col-12 md:col-6 overflow-hidden">
+        <img src="https://www.pngplay.com/wp-content/uploads/7/Headphones-Transparent-PNG.png" alt="Image" class="md:ml-auto block md:h-full">
     </div>
 </div>
 
 
 
-<div class="grid mt-5">   
+<div class="flex flex-wrap justify-content-center mt-5">   
 
     <div *ngFor="let product of products"
-    class="col-3">
+    class="m-2">
         <app-card [product]="product" ></app-card>
     </div>
 </div>
