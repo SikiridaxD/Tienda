@@ -75,7 +75,5 @@ export class ProductPageComponent implements OnInit {
       (this.product.price / 100) * this.product.discountPercentage
     );
   }
-
-
  
 }

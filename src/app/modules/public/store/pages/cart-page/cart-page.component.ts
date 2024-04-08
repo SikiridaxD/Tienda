@@ -22,7 +22,7 @@ export class CartPageComponent implements OnInit {
     private productService: ProductService, 
     ){}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.cartService.cartItems.subscribe( data => {
       this.cart = data
     })

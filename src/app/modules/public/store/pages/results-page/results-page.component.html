@@ -1,13 +1,6 @@
-<h1>Products</h1>
 
-<app-search-box
-(onDebounce)="searchProduct($event)"
-></app-search-box>
+<h1> Searching for: {{ this.search }} </h1>
 
-<div class="flex justify-content-end">
-    <p-button icon="pi pi-plus" [routerLink]="['/admin/new-product']">
-    </p-button>
-</div>
 
 <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
@@ -22,16 +15,12 @@
     </ng-template>
     <ng-template pTemplate="body" let-product>
         <tr>
-            <td><img [src]="product.thumbnail" class="thumbnail"></td>
+            <td><img [src]="product.thumbnail" style="max-width: 80px;" class="thumbnail"></td>
             <td>{{ product.title }}</td>
             <td>{{ product.brand }}</td>
             <td>{{ product.category | titlecase }}</td>
             <td>{{ product.price | currency }}</td>
-            <td><p-button 
-                icon="pi pi-pencil" 
-                styleClass="p-button-sm"
-                [routerLink]="['/admin/products/', product.id]"
-                > </p-button></td>
+            <td>
         </tr>
     </ng-template>
 </p-table>

@@ -7,6 +7,7 @@ import {
 import { CartItem } from 'src/app/core/models/cart.model';
 import { Product } from 'src/app/core/models/product.model';
 import { ProductService } from 'src/app/modules/admin/products/services/product.service';
+import { CartService } from 'src/app/modules/public/store/services/cart.service';
 
 @Component({
   selector: 'app-minicard',
@@ -41,6 +42,7 @@ export class MinicardComponent {
   quantity: number = 1;
 
   constructor(
+    private cartService: CartService,
     private confirmationService: ConfirmationService,
     private productService: ProductService,
     private messageService: MessageService
@@ -51,10 +53,7 @@ export class MinicardComponent {
   }
 
   removeFromCart() {
-    // if ( this.cart.product.id !== undefined ){
-    //   // this.cartService.removeElementById(this.cart.product.id);
-    //   // this.cartService.storeInLocal();
-    // }
+    this.cartService.removeItem(this.product.id!.toString())
   }
 
   updateProduct() {
@@ -65,34 +64,17 @@ export class MinicardComponent {
 
   confirm1() {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to proceed?',
-      header: 'Confirmation',
+      header: 'Remove product...',
+      message: 'Do you want to remove this product from your cart?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.messageService.add({
           severity: 'info',
           summary: 'Confirmed',
-          detail: 'You have accepted',
+          detail: 'Product removed',
         });
-      },
-      reject: (type: any) => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Rejected',
-              detail: 'You have rejected',
-            });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({
-              severity: 'warn',
-              summary: 'Cancelled',
-              detail: 'You have cancelled',
-            });
-            break;
-        }
-      },
+        this.removeFromCart();
+      }
     });
   }
 

@@ -1,7 +1,9 @@
 <div class="flex justify-content-center gap-3">
   <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
-    <input type="text" 
+    <input 
+    (keyup.enter)="search()"
+    type="text" 
     pInputText 
     placeholder="Search" 
     [formControl]="inputControl"

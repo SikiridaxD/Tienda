@@ -9,6 +9,7 @@ import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { MessageService } from 'primeng/api';
 import { CartService } from './services/cart.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ResultsPageComponent } from './pages/results-page/results-page.component';
 
 
 
@@ -17,7 +18,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     LayoutPageComponent,
     HomePageComponent,
     ProductPageComponent,
-    CartPageComponent
+    CartPageComponent,
+    ResultsPageComponent
   ],
   imports: [
     CommonModule,

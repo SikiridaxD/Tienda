@@ -24,7 +24,6 @@ export class CardComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -40,15 +39,6 @@ export class CardComponent implements OnInit {
       };
       this.cartService.addItem(newItem);
     }
-  }
-
-  saveProduct() {
-    () =>
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Product added to cart',
-      });
   }
 
   updateProduct() {

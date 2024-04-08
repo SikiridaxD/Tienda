@@ -4,6 +4,7 @@ import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { ResultsPageComponent } from './pages/results-page/results-page.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
       {path: 'home', component: HomePageComponent},
       {path: 'cart', component: CartPageComponent},
       {path: 'product/:id', component: ProductPageComponent},
+      {path: 'results/:search', component: ResultsPageComponent},
     ]
   },
   {
